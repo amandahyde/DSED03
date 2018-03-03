@@ -38,37 +38,38 @@ namespace DSED03
         private void LoadData()
         {
 
-       
+            #region Game Load
 
+            //Get Punters
             for (int i = 0; i < 3; i++)
             {
                 myPunter[i] = Factory.GetAPunter(i);
             }
 
+            //Get Foxes
             for (int i = 0; i < 4; i++)
             {
                 myDragon[i] = Factory.GetADragon(i);
             }
 
-
+            //Set Punters Cash
             raceTime.TomCash = myPunter[0].Cash;
             raceTime.DickCash = myPunter[1].Cash;
             raceTime.HarryCash = myPunter[2].Cash;
 
-
+            //Set values
             NudDragonNumber.Minimum = 1;
             NudDragonNumber.Maximum = 4;
 
             NudDragonNumber.Text = myPunter[raceTime.DragonNum].Dragon.ToString();
 
-            //NudDragonNumber.Maximum = Convert.ToDecimal(myPunter[raceTime.DragonNum].Dragon);
+      
 
             btnRace.Enabled = false;
             NudDragonNumber.Enabled = false;
             NudBetAmount.Enabled = false;
             btnBet.Enabled = false;
 
-            btnNewRace.Enabled = false;
 
             //set images to dragon numbers
             PB1.Tag = myDragon[0].DragonName;
@@ -81,13 +82,15 @@ namespace DSED03
 
 
         }
+#endregion
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-         
 
-            //Form1.ActiveForm.Size = new Size(500, 500);
+
+#region Background Transparency 
+
             //Makes Backgrounds transparent for pictureboxes
             this.PointToScreen(PB1.Location);
             PB1.Parent = PBMK;
@@ -103,15 +106,20 @@ namespace DSED03
             PB4.BackColor = Color.Transparent;
         }
 
- 
-  
+#endregion
+
+        #region Start Race
 
         private void btnRace_Click(object sender, EventArgs e)
         {
 
             btnRace.Enabled = false;
 
+            btnBet.Enabled = false;
+
             raceTime.TrackLength = Form1.ActiveForm.Width - PB1.Width;
+
+            // set location of foxes
 
             while (PB1.Location.X < raceTime.TrackLength && PB2.Location.X < raceTime.TrackLength && PB3.Location.X < raceTime.TrackLength && PB4.Location.X < raceTime.TrackLength)
 
@@ -125,7 +133,7 @@ namespace DSED03
                 Application.DoEvents();
             }
 
-
+            //determine race winner based on location point
 
             if (PB1.Location.X >= raceTime.TrackLength)
             {
@@ -162,32 +170,37 @@ namespace DSED03
 
             }
 
+            //run method to determine winner
             winner();
 
-            btnNewRace.Enabled = true;
+
 
             NudBetAmount.Enabled = false;
 
             RBDick.Checked = false;
             RBHarry.Checked = false;
             RBTom.Checked = false;
+
+            // run new race method
+            startnewrace();
         }
 
-       
+#endregion
 
 
+
+        #region Radio Button Selector
         private void RbBettors_CheckedChanged(object sender, EventArgs e)
         {
             raceTime.RadioButton = (RadioButton) sender;
 
-
-
+            //associate radio buttons with punters
 
             if (raceTime.RadioButton.Checked == true)
             {
                 raceTime.GuyNum = Convert.ToInt16(raceTime.RadioButton.Tag);
-                this.Text = myPunter[raceTime.GuyNum].ToString();
-
+          
+                this.Text = "The Great Fox Race";
 
                 if (raceTime.GuyNum == 0)
                 {
@@ -216,15 +229,18 @@ namespace DSED03
 
             }
 
-            
 
+#endregion
 
         }
 
+        #region Place Bet
         private void btnBet_Click(object sender, EventArgs e)
         {
        
-          
+          //set bet amounts for the punters
+
+            //display fox number and bet amount relative to punter - outputted to a label
 
             raceTime.GuyNum = Convert.ToInt16(raceTime.RadioButton.Tag);
 
@@ -267,7 +283,9 @@ namespace DSED03
 
             
         }
+#endregion
 
+        #region Winner
         public void winner()
 
 
@@ -279,6 +297,7 @@ namespace DSED03
             if (raceTime.WinningDragon == Convert.ToInt16(lblTomDragon.Text) && raceTime.TomCash >=1)
 
             {
+                //double cash for winner
                 raceTime.TomCash = raceTime.TomCash * 2;
                 lblTomBet.Text = "Tom has won!!!";
                 lblTomBet.ForeColor = Color.GreenYellow;
@@ -350,25 +369,33 @@ namespace DSED03
             lblHarry.Text = raceTime.HarryCash.ToString();
 
 
-            if (raceTime.HarryCash <= 0 && raceTime.DickCash <= 0 && raceTime.TomCash <= 0)
+            if (raceTime.HarryCash >= 0 && raceTime.DickCash >= 0 && raceTime.TomCash >= 0)
             {
                 NudBetAmount.Enabled = false;
-                btnNewRace.Enabled = false;
+                //btnNewRace.Enabled = false;
             }
         }
+#endregion
 
-
+        #region Reset Game
         private void btnReset_Click(object sender, EventArgs e)
         {
+
+            //RESTART GAME
+
+            //reset location of the foxes
             PB1.Location = new Point(200, 250);
             PB2.Location = new Point(200, 330);
             PB3.Location = new Point(200, 410);
             PB4.Location = new Point(200, 480);
 
+            //reset label txt
             lblHarryBet.Text = "";
             lblTomBet.Text = "";
             lblDickBet.Text = "";
 
+
+            //get punters and foxes
             for (int i = 0; i < 3; i++)
             {
                 myPunter[i] = Factory.GetAPunter(i);
@@ -379,7 +406,7 @@ namespace DSED03
                 myDragon[i] = Factory.GetADragon(i);
             }
 
-
+            //set cash value for punters
             raceTime.TomCash = myPunter[0].Cash;
             raceTime.DickCash = myPunter[1].Cash;
             raceTime.HarryCash = myPunter[2].Cash;
@@ -390,14 +417,14 @@ namespace DSED03
 
             NudDragonNumber.Text = myPunter[raceTime.DragonNum].Dragon.ToString();
 
-            //NudDragonNumber.Maximum = Convert.ToDecimal(myPunter[raceTime.DragonNum].Dragon);
-
+        
+            //disable buttons until bets are placed.
             btnRace.Enabled = false;
             NudDragonNumber.Enabled = false;
             NudBetAmount.Enabled = false;
             btnBet.Enabled = false;
 
-            btnNewRace.Enabled = false;
+            //btnNewRace.Enabled = false;
 
             //set images to dragon numbers
             PB1.Tag = myDragon[0].DragonName;
@@ -407,54 +434,76 @@ namespace DSED03
 
 
     
-
+            //enable radio buttons
             RBTom.Enabled = true;
             RBDick.Enabled = true;
             RBHarry.Enabled = true;
 
-            lblHarryBet.ForeColor = Color.Black;
-            lblTomBet.ForeColor = Color.Black;
-            lblDickBet.ForeColor = Color.Black;
+            //set label txet colours
+            lblHarryBet.ForeColor = Color.Gold;
+            lblTomBet.ForeColor = Color.Gold;
+            lblDickBet.ForeColor = Color.Gold;
         }
 
-        public void calculatewin()
-        {
-            
+#endregion
 
-        }
 
-        private void btnNewRace_Click(object sender, EventArgs e)
+        #region Start New Race
+        public void startnewrace()
         {
+
+            //reset location of foxes
+
             PB1.Location = new Point(200, 250);
             PB2.Location = new Point(200, 330);
             PB3.Location = new Point(200, 410);
             PB4.Location = new Point(200, 480);
 
-
+            //set punter new cash amount
             myPunter[0].Cash = Convert.ToInt16(lblTom.Text);
             myPunter[1].Cash = Convert.ToInt16(lblDick.Text);
             myPunter[2].Cash = Convert.ToInt16(lblHarry.Text);
 
-             
-         
-         
-
+            // re enable radio buttons
             RBDick.Checked = true;
             RBHarry.Checked = true;
             RBTom.Checked = true;
 
+
+            //disable betting if punters have zero cash
             if (RBDick.Enabled == false && RBHarry.Enabled == false && RBTom.Enabled == false)
             {
-                NudBetAmount.Enabled = false;
+            
                 NudDragonNumber.Enabled = false;
                 btnBet.Enabled = false;
+                btnRace.Enabled = false;
+       
+
             }
 
-            else
-            {
-                NudBetAmount.Enabled = false;
-            }
         }
+
+#endregion
+
+        #region TopMenu
+
+        //menu items
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Have a go at Fox Racing but remember when you gamble you always lose in the end ;)");
+        }
+
+        private void howToPlayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Select a punter and choose bet value and fox, hit the race button.");
+        }
+
+        #endregion
     }
 }
 

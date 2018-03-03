@@ -46,7 +46,6 @@
             this.NudDragonNumber = new System.Windows.Forms.NumericUpDown();
             this.NudBetAmount = new System.Windows.Forms.NumericUpDown();
             this.lblMaxBet = new System.Windows.Forms.Label();
-            this.btnNewRace = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnRace = new System.Windows.Forms.Button();
             this.lblDickBet = new System.Windows.Forms.Label();
@@ -89,7 +88,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(2593, 45);
+            this.menuStrip1.Size = new System.Drawing.Size(2593, 47);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -99,34 +98,37 @@
             this.infoToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(70, 41);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(70, 43);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // infoToolStripMenuItem
             // 
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(170, 42);
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(297, 42);
             this.infoToolStripMenuItem.Text = "Info";
+            this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(170, 42);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(297, 42);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.howToPlayToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(85, 41);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(85, 43);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // howToPlayToolStripMenuItem
             // 
             this.howToPlayToolStripMenuItem.Name = "howToPlayToolStripMenuItem";
-            this.howToPlayToolStripMenuItem.Size = new System.Drawing.Size(267, 42);
+            this.howToPlayToolStripMenuItem.Size = new System.Drawing.Size(297, 42);
             this.howToPlayToolStripMenuItem.Text = "How to Play";
+            this.howToPlayToolStripMenuItem.Click += new System.EventHandler(this.howToPlayToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -150,7 +152,6 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.btnNewRace);
             this.splitContainer1.Panel2.Controls.Add(this.btnReset);
             this.splitContainer1.Panel2.Controls.Add(this.btnRace);
             this.splitContainer1.Panel2.Controls.Add(this.lblDickBet);
@@ -271,32 +272,21 @@
             // lblMaxBet
             // 
             this.lblMaxBet.AutoSize = true;
+            this.lblMaxBet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaxBet.ForeColor = System.Drawing.Color.Gold;
-            this.lblMaxBet.Location = new System.Drawing.Point(162, 119);
+            this.lblMaxBet.Location = new System.Drawing.Point(151, 115);
             this.lblMaxBet.Name = "lblMaxBet";
-            this.lblMaxBet.Size = new System.Drawing.Size(99, 29);
+            this.lblMaxBet.Size = new System.Drawing.Size(149, 40);
             this.lblMaxBet.TabIndex = 3;
             this.lblMaxBet.Text = "Max Bet";
-            // 
-            // btnNewRace
-            // 
-            this.btnNewRace.BackColor = System.Drawing.Color.Lime;
-            this.btnNewRace.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewRace.Location = new System.Drawing.Point(1052, 38);
-            this.btnNewRace.Name = "btnNewRace";
-            this.btnNewRace.Size = new System.Drawing.Size(236, 186);
-            this.btnNewRace.TabIndex = 7;
-            this.btnNewRace.Text = "NEW RACE";
-            this.btnNewRace.UseVisualStyleBackColor = false;
-            this.btnNewRace.Click += new System.EventHandler(this.btnNewRace_Click);
             // 
             // btnReset
             // 
             this.btnReset.BackColor = System.Drawing.Color.Red;
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(1313, 38);
+            this.btnReset.Location = new System.Drawing.Point(1189, 38);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(236, 186);
+            this.btnReset.Size = new System.Drawing.Size(360, 186);
             this.btnReset.TabIndex = 5;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = false;
@@ -308,7 +298,7 @@
             this.btnRace.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRace.Location = new System.Drawing.Point(789, 38);
             this.btnRace.Name = "btnRace";
-            this.btnRace.Size = new System.Drawing.Size(236, 186);
+            this.btnRace.Size = new System.Drawing.Size(331, 186);
             this.btnRace.TabIndex = 4;
             this.btnRace.Text = "RACE";
             this.btnRace.UseVisualStyleBackColor = false;
@@ -358,7 +348,6 @@
             this.PB1.TabIndex = 0;
             this.PB1.TabStop = false;
             this.PB1.Tag = "0";
-            //this.PB1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // PB2
             // 
@@ -403,7 +392,6 @@
             this.PBMK.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PBMK.TabIndex = 7;
             this.PBMK.TabStop = false;
-   
             // 
             // lblTomDragon
             // 
@@ -592,7 +580,6 @@
         private System.Windows.Forms.Label lblTomBetAmount;
         private System.Windows.Forms.Label lblDickBetAmount;
         private System.Windows.Forms.Label lblHarryBetAmount;
-        private System.Windows.Forms.Button btnNewRace;
     }
 }
 
