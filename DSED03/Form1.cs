@@ -372,7 +372,7 @@ namespace DSED03
             if (raceTime.HarryCash >= 0 && raceTime.DickCash >= 0 && raceTime.TomCash >= 0)
             {
                 NudBetAmount.Enabled = false;
-                //btnNewRace.Enabled = false;
+             
             }
         }
 #endregion

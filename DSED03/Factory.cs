@@ -49,7 +49,7 @@ namespace DSED03
 
         public static int Number()
         {
-            return randomNumber = Random.Next(0, 50);
+            return randomNumber = Random.Next(0, 10);
         }
 
     }
